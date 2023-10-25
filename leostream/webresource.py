@@ -29,7 +29,7 @@ class WebResource(object):
 
         self._HEADERS = {
         'Content-Type':'application/json',
-        'Authorization': self._api.authenticate()}
+        'Authorization': self._api._session}
 
         response = requests.put(url=self._URL, headers=self._HEADERS, verify=False, data=json.dumps(data))
         data = response.json()
@@ -45,7 +45,7 @@ class WebResource(object):
 
         self._HEADERS = {
         'Content-Type':'application/json',
-        'Authorization': self._api.authenticate()}
+        'Authorization': self._api._session}
 
         response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
         data = response.json()
@@ -61,7 +61,7 @@ class WebResource(object):
 
         self._HEADERS = {
         'Content-Type':'application/json',
-        'Authorization': self._api.authenticate()}
+        'Authorization': self._api._session}
 
         response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
         data = response.json()
