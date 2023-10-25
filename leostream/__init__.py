@@ -3,7 +3,7 @@ from .centers import LeostreamCenters
 from .pools import LeostreamPools
 from .center import LeostreamCenter
 from .pool import LeostreamPool
-from .login import LeostreamSession
+from .restapi import LeostreamClient
 from .policy import LeostreamPolicy
 from .policies import LeostreamPolicies
 from .poolassignments import LeostreamPoolAssignments   

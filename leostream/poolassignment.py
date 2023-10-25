@@ -1,10 +1,10 @@
-from .login import LeostreamSession
+from .restapi import LeostreamClient
 from .webresource import WebResource
 
 class LeostreamPoolAssignment(WebResource):
     
     def __init__(self, pool_id, id) -> None:
-        self._api = LeostreamSession()
+        self._api = LeostreamClient()
         self.resource = "pool-assignments"
         self._id = id
         self._pool_id = pool_id
