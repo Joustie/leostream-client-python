@@ -45,7 +45,7 @@ class WebResource(object):
 
         self._HEADERS = {
         'Content-Type':'application/json',
-        'Authorization': self._api._session}
+        'Authorization': self._api.authenticate()}
 
         response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
         data = response.json()

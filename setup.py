@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.9' 
+VERSION = '1.0.0' 
 DESCRIPTION = 'Leostream Python client'
 LONG_DESCRIPTION = 'Leostream REST API client written in Python'
 
@@ -13,15 +13,13 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=[], # add any additional packages that 
-        # needs to be installed along with your package. Eg: 'caer'
-        
+        install_requires=[], 
         keywords=['python', 'leostream', 'rest', 'api', 'client'],
         classifiers= [
-            "Development Status :: 3 - Alpha",
-            "Intended Audience :: Education",
+            "Development Status :: 4 - Beta",
+            "Intended Audience :: Developers",
+            "Environment :: Console",
             "Programming Language :: Python :: 3",
-            "Operating System :: MacOS :: MacOS X",
-            "Operating System :: Microsoft :: Windows",
+            "Operating System :: OS Independent",
         ]
 )
