@@ -32,6 +32,10 @@ class LeostreamClient:
 
       data = json.loads(response.text)
 
+      # check https status code
+      if response.status_code != 200:
+        raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+
       sessionID= "Bearer " + data["sid"]
       cls._session = sessionID
     return cls.instance

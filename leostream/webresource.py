@@ -34,10 +34,11 @@ class WebResource(object):
         response = requests.put(url=self._URL, headers=self._HEADERS, verify=False, data=json.dumps(data))
         data = response.json()
 
-        if response:
-            return data
-        else:
-            return {"Broker": "Error"}
+        # check https status code
+        if response.status_code != 200:
+            raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+
+        return data
 
     def list(self):
         '''
@@ -50,10 +51,11 @@ class WebResource(object):
         response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
         data = response.json()
 
-        if response:
-            return data
-        else:
-            return {"Broker": "Error"}
+        # check https status code
+        if response.status_code != 200:
+            raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+
+        return data
     
     def get(self):
         '''
@@ -66,10 +68,11 @@ class WebResource(object):
         response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
         data = response.json()
 
-        if response:
-            return data
-        else:
-            return {"Broker": "Error"}
+        # check https status code
+        if response.status_code != 200:
+            raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+
+        return data
 
     def writefile(self, data):
         '''
