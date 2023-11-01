@@ -7,8 +7,8 @@ class LeostreamPoolAssignment(WebResource):
     resource_type = "pool-assignments"
 
     def __init__(self, policy_id, id) -> None:
+        ''' Goal: Get the pool assignment for the policy id and pool assignment id passed to the function.'''
         self._api = LeostreamClient()
-        self.resource = "pool-assignments"
         self._id = id
         self._policy_id = policy_id
         self._URL="https://"+str(self._api.broker)+"/rest/v1/policies/"+ str(self.policy_id) + "/pool-assignments/" + str(self._id)
@@ -17,8 +17,11 @@ class LeostreamPoolAssignment(WebResource):
 
     @classmethod
     def list(cls, policy_id):
-        '''
-        This method will return a list of all resources of the type specified in the url attribute'''
+        ''' Goal: List all pool assignments for a policy.
+            Steps:
+            1. Get the policy id as argument
+            2. Get the pool assignments for the policy by calling the API
+            3. Return the pool assignments '''
 
         cls._api = LeostreamClient()
         cls._HEADERS = {

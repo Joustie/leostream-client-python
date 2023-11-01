@@ -4,8 +4,15 @@ from .center import LeostreamCenter
 
 class LeostreamPool(WebResource):
     
+    resource_type = "pools"
+
     def __init__(self, id=None, name=None, center_id=None) -> None:
-        self.resource = "pool"
+        ''' Goal: Create a new Leostream pool with the name and center id passed to the function OR get the existing pool data for the pool id passed to the function.
+            Steps:
+            1. Get a reference to the Leostream API
+            2. If the pool id is None, create a new pool via the API
+            3. If the pool id is not None, get the pool data via the API
+            '''
         self._api = LeostreamClient()
         if id is None:
             self._URL="https://"+str(self._api.broker)+"/rest/v1/pools/"

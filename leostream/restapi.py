@@ -5,6 +5,11 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import os
 
 class LeostreamClient:
+  ''' 
+  This class will create a singleton object for the LeostreamClient.  The singleton object will be used to store the session id for the API. 
+  The session id will be used for all API calls and is obtained through the login API call in the __new__ function.
+  
+  '''
   _session = None
 
   def get_broker(self):
