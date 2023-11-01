@@ -22,7 +22,23 @@ class WebResource(object):
         - Create inheritance relation or interface like construction to avoid duplication (login to Leostream/ API get,update)
         '''
     
+    def create(self):
+        '''
+        This method will create the resource via the API. It will return the response from the API'''
+        
+        self._HEADERS = {
+        'Content-Type':'application/json',
+        'Authorization': self._api._session}
 
+        response = requests.post(url=self._URL, headers=self._HEADERS, verify=False, data=json.dumps(self.data))
+        data = response.json()
+
+        # check https status code
+        if response.status_code != 201:
+            raise Exception("Error: the request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+
+        return data['stored_data']
+         
     def update(self , data):
         ''' 
         This method will update the resource via the API. It will return the response from the API'''
@@ -53,7 +69,7 @@ class WebResource(object):
 
         # check https status code
         if response.status_code != 200:
-            raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+            raise Exception("Error: the request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
 
         return data
     
@@ -70,7 +86,7 @@ class WebResource(object):
 
         # check https status code
         if response.status_code != 200:
-            raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
+            raise Exception("Error: the request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
 
         return data
 
