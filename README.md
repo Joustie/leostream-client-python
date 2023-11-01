@@ -15,13 +15,13 @@ The client API can currently be used to query the following endpoints:
 Currently only the list and get methods are implemented.
 - [Pools](#pools)
 The create method is implemented. The list and get methods are implemented. Update is partially implemented but because the Leostream API does not support updating all fields of a pool it is not possible to update all fields of a pool in one go. The delete method is not implemented.
-- [Gateways](#querying-the-gateways-endpoint)
+- [Gateways](#gateways)
 The create method is implemented. The list and get methods are implemented. Update is not implemented. The delete method is not implemented.
 
-- [Policies](#querying-the-policy-endpoint)
+- [Policies](#policies)
 The create method is not implemented. The list and get methods are implemented. Update is not implemented. The delete method is not implemented.
 
-- [Poolassignments](#querying-the-poolassignments-endpoint)
+- [Poolassignments](#poolassignments)
 The create method is not implemented. The list and get methods are implemented. Update is not implemented. The delete method is not implemented.
 
 ### Authentication
