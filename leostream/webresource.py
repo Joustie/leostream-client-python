@@ -2,6 +2,7 @@
 import requests
 import json
 import os
+from .restapi import LeostreamClient
 
 class WebResource(object):
     ''' This class is the base class for all Leostream resources found in the API. It contains the common functions
@@ -22,6 +23,23 @@ class WebResource(object):
         - Create inheritance relation or interface like construction to avoid duplication (login to Leostream/ API get,update)
         '''
     
+    @classmethod
+    def find(cls, name):
+        ''' Goal: Find the resource for the resource name passed to the function.
+            Steps:
+            1. Get the list of resources for the resource type 
+            2. Filter the list with the resource name passed to the function
+            3. Return the resource found'''
+        
+        # Get the he current resource by name       
+        cls.data = cls.list()
+        resource = [x for x in cls.data if x["name"]==name]
+        # If the resource is not found, raise an exception
+        if not resource:
+            raise Exception(f"Error: Resource {name} not found")
+        else:
+            return resource
+
     def create(self):
         '''
         This method will create the resource via the API. It will return the response from the API'''
@@ -55,16 +73,19 @@ class WebResource(object):
             raise Exception("Error: the login request returned HTTP status code " + str(response.status_code) + " with the following message: " + str(data))
 
         return data
-
-    def list(self):
+    
+    @classmethod
+    def list(cls):
         '''
         This method will return a list of all resources of the type specified in the url attribute'''
 
-        self._HEADERS = {
+        cls._api = LeostreamClient()
+        cls._HEADERS = {
         'Content-Type':'application/json',
-        'Authorization': self._api._session}
-
-        response = requests.get(url=self._URL, headers=self._HEADERS, verify=False)
+        'Authorization': cls._api._session}
+        cls._URL="https://"+str(cls._api.broker)+"/rest/v1/" + cls.resource_type + "?as+tree=0"
+        
+        response = requests.get(url=cls._URL, headers=cls._HEADERS, verify=False)
         data = response.json()
 
         # check https status code
