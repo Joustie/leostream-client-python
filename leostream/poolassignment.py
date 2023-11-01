@@ -11,8 +11,7 @@ class LeostreamPoolAssignment(WebResource):
         self._api = LeostreamClient()
         self._id = id
         self._policy_id = policy_id
-        self._URL="https://"+str(self._api.broker)+"/rest/v1/policies/"+ str(self.policy_id) + "/pool-assignments/" + str(self._id)
-        print(self._URL)
+        self._URL="https://"+str(self._api.broker)+"/rest/v1/policies/"+ str(self._policy_id) + "/pool-assignments/" + str(self._id)
         self.data = self.get()
 
     @classmethod
