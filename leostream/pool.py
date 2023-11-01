@@ -4,12 +4,25 @@ from .center import LeostreamCenter
 
 class LeostreamPool(WebResource):
     
-    def __init__(self,id) -> None:
-        self._api = LeostreamClient()
+    def __init__(self, id=None, name=None, center_id=None) -> None:
         self.resource = "pool"
-        self._id = id
-        self._URL="https://"+str(self._api.broker)+"/rest/v1/pools/"+ str(self._id)
-        self.data = self.get()
+        self._api = LeostreamClient()
+        if id is None:
+            self._URL="https://"+str(self._api.broker)+"/rest/v1/pools/"
+            # create an emtpy json object to store the data
+            self.data = {
+                    "name": name,
+                    "pool_definition": {
+                        "restrict_by": "C",
+                        "server_ids": center_id,
+                },
+            }
+            self.data = self.create()
+            self._id = self.data['id']
+        else:
+            self._id = id
+            self._URL="https://"+str(self._api.broker)+"/rest/v1/pools/"+ str(self._id)
+            self.data = self.get()
                
     def update_image(self, target_image_name):
         ''' Goal: Update this Leostream pool with the image name passed to the function.
